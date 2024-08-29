@@ -1,0 +1,49 @@
+*{
+    /* 初始化 */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* 弹性布局宽高包含 边框 内边距  */
+}
+/* :root选择器是匹配文档根元素 */
+:root{
+    /* 声明自定义属性 */
+    --rotate-arrow:0; /* 旋转角度 */
+    --dropdown-height:0; /* 下拉列表高度 */
+    --list-opacity:0; /* 列表透明度 */
+    --translate-value:0; /* 列表偏移 */
+    --floating-icon-size:26; /* 浮动图标大小 */
+    --floating-icon-top:0; /* 浮动图标位置 */
+    --floating-icon-left:0; /* 浮动图标位置 */
+} 
+html{
+    font-size: 80%; /* 根元素字体大小 */
+}
+body{
+    /* 将 body 元素的高度设置为浏览器视窗高度的 100%。 */
+    height: 100%; 
+    /* 将 body 元素设置为弹性容器，开启弹性布局模式。 */
+    display: flex; 
+    /* 设置弹性容器子元素排列方向为纵向（从上到下）。 */
+    flex-direction: column; 
+    /* 设置弹性容器子元素在纵向上的对齐方式为居中。 */
+    justify-content: center; 
+    /* 设置弹性容器子元素在横向上的对齐方式为居中。 */
+    align-items: center; 
+    /* 将 body 元素的背景颜色设置为深灰色。 */
+    background-color: #222429;
+    /* 设置 body 元素的内边距为 1.5rem（rem 是相对单位，一般相对于根元素的字体大小）。 */
+    padding: 1.5rem;
+    /* 设置 body 元素的行高为 1.4rem，这会影响文本内容的行间距。 */
+    line-height: 1.4rem;
+}
+
+button{
+    /*  去除按钮的默认边框。 */
+    border: none;
+    /* 将按钮的背景颜色设置为透明，使其与背景颜色一致。 */
+    background-color: transparent;
+    /* 将鼠标悬停在按钮上时，光标变为指向手的形状，表示这是一个可点击的元素。 */
+    cursor: pointer;
+    /* 去除按钮的默认轮廓线。当按钮获得焦点时，通常会显示一个轮廓线，outline: none 可以去除这个轮廓线。 */
+    outline: none;
+}

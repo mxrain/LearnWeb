@@ -1,0 +1,44 @@
+.nav {
+    height: 40px;
+    background: #333;
+    box-shadow: 0 1px 2px #666; /* 投影 参数：x y 模糊度 颜色*/
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none; /* 去掉超链接下划线 */
+    list-style: none; /* 去掉无序列表圆点 */
+}
+
+.item {
+    float: right; /* 浮动:无序列表元素浮动 会在盒子里左右靠 */
+    width: 100px;
+    line-height: 40px;  /*行内高度 （关键）*/
+    text-align: center; /*文字居中*/
+}
+.navlist a{
+    /* 超链接文字颜色*/
+    color: #FFF; 
+     /*块级元素 (关键) */
+    display: block;
+    
+}
+.navlist a:hover{
+    background: #626262; /*鼠标滑过背景颜色*/
+}
+.subnav{
+    background: #333;
+    box-shadow: 0 1px 2px #333;     /* 投影 参数：x y 模糊度 颜色*/
+    display: none;           /*默认隐藏*/
+    border-radius: 6px;      /*圆角*/
+    overflow: hidden;         /*隐藏溢出部分*/
+}
+.item:hover .subnav{
+    display: block;       /*鼠标滑过显示*/
+}
+
+.subitem {
+    border-top: 1px solid #000; /* 分割线 */
+}
+

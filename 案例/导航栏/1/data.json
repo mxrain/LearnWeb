@@ -1,0 +1,9 @@
+{
+    "name": "Sandbox",
+    "description": "Sandbox",
+    "version": "1.0.0",
+    "author": "Sandbox",
+    "dependencies": [
+        "https://github.com/Sandbox/Sandbox/releases/download/1.0.0/Sandbox.zip"
+    ]
+}
