@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>分享站点</title>
+    <title>标签页案例</title>
     <style>
         .tag-container {
             display: flex;
@@ -20,56 +20,108 @@
 
         .tag.active {
             background-color: #eee;
+            color: #333;
+            border-color: #ccc;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, .1);
+            transition: all .2s;
+            transform: scale(1.05);
+            z-index: 1;
         }
     </style>
 </head>
 
 <body>
+    <h1>标签页 知识点</h1>
     <div class="tag-container">
-        <div class="tag active" data-target="tab1">标签一</div>
-        <div class="tag" data-target="tab2">标签二</div>
-        <div class="tag" data-target="tab3">标签三</div>
+        <div class="tag active" data-target="tab1">CSS</div>
+        <div class="tag" data-target="tab2">html</div>
+        <div class="tag" data-target="tab3">JavaScript</div>
     </div>
 
     <div id="tab1" class="tab-content">
-        <h2>标签一内容</h2>
-        <p>Lorem ipsum dolor sit amet...</p>
+        <h2>组合选择器</h2>
+        <p>.tag.active 两个class组合</p>
+
+        <pre>
+            .tag {
+                padding: 10px 20px;
+                margin: 5px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+    
+            .tag.active {
+                background-color: #eee;
+                color: #333;
+                border-color: #ccc;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, .1);
+                transition: all .2s;
+                transform: scale(1.05);
+                z-index: 1;
+            }
+        </pre>
+
+        <h2>display属性</h2>
+        <p>display:none 隐藏元素</p>
+        <p>display:block 显示元素</p>
+        
     </div>
 
     <div id="tab2" class="tab-content">
-        <h2>标签二内容</h2>
-        <p>Lorem ipsum dolor sit amet...</p>
+        <h2>data-target 属性使用</h2>
+        <p>data-target="tab1" 可以添加到任何标签中，
+            但是，我们一般只添加到a标签中，
+            因为a标签有默认的点击事件，
+            我们一般通过js来监听a标签的点击事件，
+            然后通过data-target属性来获取目标标签的id，
+            然后通过id来切换标签的显示和隐藏。</p>
+        <pre>
+            <div class="tag" data-target="tab1">CSS跳转</div>
+            <div class="tag" data-target="tab3">JavaScript跳转</div>
+        </pre>
     </div>
 
     <div id="tab3" class="tab-content">
-        <h2>标签三内容</h2>
-        <p>Lorem ipsum dolor sit amet...</p>
+        <h2>document.querySelectorAll('.tag')</h2>
+        <p>获取所有tag类</p>
+        <h2>tag.addEventListener('click', () => {})</h2>
+        <p>为每个标签添加点击事件</p>
+        <h2>document.getElementById(target).style.display = 'block';</h2>
+        <p>根据id获取dom树 显示目标标签</p>
+
+
+        <pre>
+            const tags = document.querySelectorAll('.tag'); // 获取所有 tag 类标签
+            const tabContents = document.querySelectorAll('.tab-content'); // 获取所有 tab-content 类标签
+            // 为每个标签添加点击事件
+            tags.forEach(tag => {
+                tag.addEventListener('click', () => {
+                    // 移除所有标签的 active 类
+                    tags.forEach(t => t.classList.remove('active'));
+                    // 添加点击标签的 active 类
+                    tag.classList.add('active');
+
+                    // 获取点击标签的 data-target 属性值
+                    const target = tag.getAttribute('data-target');
+
+                    // 隐藏所有内容区域
+                    tabContents.forEach(tab => tab.style.display = 'none');
+
+                    // 显示对应内容区域
+                    document.getElementById(target).style.display = 'block';
+                });
+            });
+            tabContents.forEach(tab => tab.style.display = 'none');
+            // 默认显示第一个内容区域
+            tabContents[0].style.display = 'block';
+        </pre>
     </div>
     <script>
-        const c = document.querySelectorAll('.tag'); // 获取所有 tag 类标签
-        const tabContents = document.querySelectorAll('.tab-content'); // 获取所有 tab-content 类标签
-        // 为每个标签添加点击事件
-        tags.forEach(tag => {
-            tag.addEventListener('click', () => {
-                // 移除所有标签的 active 类
-                tags.forEach(t => t.classList.remove('active'));
-                // 添加点击标签的 active 类
-                tag.classList.add('active');
 
-                // 获取点击标签的 data-target 属性值
-                const target = tag.getAttribute('data-target');
 
-                // 隐藏所有内容区域
-                tabContents.forEach(tab => tab.style.display = 'none');
-
-                // 显示对应内容区域
-                document.getElementById(target).style.display = 'block';
-            });
-        });
-
-        // 默认显示第一个内容区域
-        tabContents[0].style.display = 'block';
     </script>
 </body>
+<script src="index.js"></script>
 
 </html>
