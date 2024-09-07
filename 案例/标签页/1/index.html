@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>分享站点</title>
+    <style>
+        .tag-container {
+            display: flex;
+        }
+
+        .tag {
+            padding: 10px 20px;
+            margin: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .tag.active {
+            background-color: #eee;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="tag-container">
+        <div class="tag active" data-target="tab1">标签一</div>
+        <div class="tag" data-target="tab2">标签二</div>
+        <div class="tag" data-target="tab3">标签三</div>
+    </div>
+
+    <div id="tab1" class="tab-content">
+        <h2>标签一内容</h2>
+        <p>Lorem ipsum dolor sit amet...</p>
+    </div>
+
+    <div id="tab2" class="tab-content">
+        <h2>标签二内容</h2>
+        <p>Lorem ipsum dolor sit amet...</p>
+    </div>
+
+    <div id="tab3" class="tab-content">
+        <h2>标签三内容</h2>
+        <p>Lorem ipsum dolor sit amet...</p>
+    </div>
+    <script>
+        const c = document.querySelectorAll('.tag'); // 获取所有 tag 类标签
+        const tabContents = document.querySelectorAll('.tab-content'); // 获取所有 tab-content 类标签
+        // 为每个标签添加点击事件
+        tags.forEach(tag => {
+            tag.addEventListener('click', () => {
+                // 移除所有标签的 active 类
+                tags.forEach(t => t.classList.remove('active'));
+                // 添加点击标签的 active 类
+                tag.classList.add('active');
+
+                // 获取点击标签的 data-target 属性值
+                const target = tag.getAttribute('data-target');
+
+                // 隐藏所有内容区域
+                tabContents.forEach(tab => tab.style.display = 'none');
+
+                // 显示对应内容区域
+                document.getElementById(target).style.display = 'block';
+            });
+        });
+
+        // 默认显示第一个内容区域
+        tabContents[0].style.display = 'block';
+    </script>
+</body>
+
+</html>
