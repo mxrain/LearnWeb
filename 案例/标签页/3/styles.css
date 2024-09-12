@@ -1,0 +1,49 @@
+* {
+    box-sizing: border-box; /* 使所有元素的宽度和高度包括内边距和边框 */
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.tab-container {
+    width: 100vw; /* 盒子宽度等于窗口宽度 */
+}
+
+.tab-header {
+    display: flex; /* 使用flexbox布局 */
+    overflow-x: auto; /* 允许横向滚动 */
+    white-space: nowrap; /* 防止换行 */
+    scrollbar-width: none;/* 隐藏滚动条 */
+}
+.tab svg{
+    width: 30px;
+}
+.tab {
+    padding: 10px 20px; /* 内边距 */
+    cursor: pointer; /* 鼠标指针样式 */
+    transition: background-color 0.3s; /* 背景颜色过渡效果 */
+}
+
+.tab:hover {
+    background-color: #f0f0f0; /* 悬停效果 */
+}
+
+.tab.active {
+    /* 激活标签的背景颜色 */
+    /* background-color: #4CAF50; */
+    border-bottom: black 2px solid;
+}
+
+.tab-content {
+    padding: 20px; /* 内容内边距 */
+}
+
+.content {
+    display: none; /* 默认隐藏内容 */
+}
+
+.content.active {
+    display: block; /* 显示激活的内容 */
+}

@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>CRUD 表格</title>
+    <style>
+        table {
+            /* 合并单元格 */
+            border-collapse: collapse;
+             /* 宽度100%  */
+            width: 100%;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f0f0f0;
+        }
+
+        .edit-button {
+            background-color: #4CAF50;
+            /* 绿色按钮 */
+            color: white;
+            padding: 5px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .delete-button {
+            background-color: #f44336;
+            /* 红色按钮 */
+            color: white;
+            padding: 5px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .save-button {
+            background-color: #4CAF50;
+            /* 绿色按钮 */
+            color: white;
+            padding: 5px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .cancel-button {
+            background-color: #f44336;
+            /* 红色按钮 */
+            color: white;
+            padding: 5px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>网盘资源分类管理</h2>
+
+    <table id="resourceTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>分类名称</th>
+                <th>链接</th>
+                <th>SVG Path</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- 表格数据将在此处显示 -->
+        </tbody>
+    </table>
+
+    <button onclick="createResource()">添加分类</button>
+
+    <script>
+        const resourceData = [
+            {
+                "text": "影视/动漫",
+                "path_d": "M10 10 L90 10 L90 90 L10 90 Z",
+                "link": "/dongman/",
+                "items": [
+                    {
+                        "text": "番剧",
+                        "path_d": "M20 20 L70 20 L70 70 L20 70 Z",
+                        "link": "/anime/"
+                    },
+                    {
+                        "text": "动画",
+                        "path_d": "M20 20 L70 20 L70 70 L20 70 Z",
+                        "link": "/animation/"
+                    },
+                    {
+                        "text": "电影",
+                        "path_d": "M20 20 L70 20 L70 70 L20 70 Z",
+                        "link": "/movie/"
+                    },
+                    {
+                        "text": "电视剧",
+                        "path_d": "M20 20 L70 20 L70 70 L20 70 Z",
+                        "link": "/tv/"
+                    },
+                    {
+                        "text": "综艺",
+                        "path_d": "M20 20 L70 20 L70 70 L20 70 Z",
+                        "link": "/variety/"
+                    },
+                    {
+                        "text": "纪录片",
+                        "path_d": "M20 20 L70 20 L70 70 L20 70 Z",
+                        "link": "/documentary/"
+                    },
+                    {
+                        "text": "短剧",
+                        "path_d": "M20 20 L70 20 L70 70 L20 70 Z",
+                        "link": "/short-film/"
+                    },
+                    {
+                        "text": "漫画",
+                        "path_d": "M20 20 L70 20 L70 70 L20 70 Z",
+                        "link": "/comic/"
+                    },
+                    {
+                        "text": "小说",
+                        "path_d": "M20 20 L70 20 L70 70 L20 70 Z",
+                        "link": "/novel/"
+                    },
+                    {
+                        "text": "有声书",
+                        "path_d": "M20 20 L70 20 L70 70 L20 70 Z",
+                        "link": "/audiobook/"
+                    }
+                ]
+            },
+            {
+                "text": "软件/游戏",
+                "path_d": "M10 10 L90 10 L90 90 L10 90 Z",
+                "link": "/software-game/",
+                "items": [
+                    {
+                        "text": "电脑软件",
+                        "path_d": "M20 20 L70 20 L70 70 L20 70 Z",
+                        "link": "/pc-software/"
+                    },
+                    {
+                        "text": "手机软件",
+                        "path_d": "M20 20 L70 20 L70 70 L20 70 Z",
+                        "link": "/mobile-software/"
+                    },
+                    {
+                        "text": "游戏",
+                        "path_d": "M20 20 L70 20 L70 70 L20 70 Z",
+                        "link": "/game/"
+                    },
+                    {
+                        "text": "单机游戏",
+                        "path_d": "M20 20 L70 20 L70 70 L20 70 Z",
+                        "link": "/single-player-game/"
+                    },
+                    {
+                        "text": "网络游戏",
+                        "path_d": "M20 20 L70 20 L70 70 L20 70 Z",
+                        "link": "/online-game/"
+                    },
+                    {
+                        "text": "手机游戏",
+                        "path_d": "M20 20 L70 20 L70 70 L20 70 Z",
+                        "link": "/mobile-game/"
+                    },
+                    {
+                        "text": "游戏资源",
+                        "path_d": "M20 20 L70 20 L70 70 L20 70 Z",
+                        "link": "/game-resource/"
+                    }
+                ]
+            },
+            {
+                "text": "电子书",
+                "path_d": "M10 10 L90 10 L90 90 L10 90 Z",
+                "link": "/ebook/",
+                "items": [
+                    {
+                        "text": "小说",
+                        "path_d": "M20 20 L70 20 L70 70 L20 70 Z",
+                        "link": "/novel-ebook/"
+                    },
+                    {
+                        "text": "教材",
+                        "path_d": "M20 20 L70 20 L70 70 L20 70 Z",
+                        "link": "/textbook/"
+                    },
+                    {
+                        "text": "杂志",
+                        "path_d": "M20 20 L70 20 L70 70 L20 70 Z",
+                        "link": "/magazine/"
+                    },
+                    {
+                        "text": "漫画",
+                        "path_d": "M20 20 L70 20 L70 70 L20 70 Z",
+                        "link": "/comic-ebook/"
+                    },
+                    {
+                        "text": "工具书",
+                        "path_d": "M20 20 L70 20 L70 70 L20 70 Z",
+                        "link": "/reference-book/"
+                    }
+                ]
+            },
+            {
+                "text": "学习教育",
+                "path_d": "M10 10 L90 10 L90 90 L10 90 Z",
+                "link": "/study-education/",
+                "items": [
+                    {
+                        "text": "课程",
+                        "path_d": "M20 20 L70 20 L70 70 L20 70 Z",
+                        "link": "/course/"
+                    },
+                    {
+                        "text": "资料",
+                        "path_d": "M20 20 L70 20 L70 70 L20 70 Z",
+                        "link": "/material/"
+                    }
+                ]
+            },
+            {
+                "text": "图片",
+                "path_d": "M10 10 L90 10 L90 90 L10 90 Z",
+                "link": "/image/",
+                "items": [
+                    {
+                        "text": "风景",
+                        "path_d": "M20 20 L70 20 L70 70 L20 70 Z",
+                        "link": "/scenery/"
+                    },
+                    {
+                        "text": "人物",
+                        "path_d": "M20 20 L70 20 L70 70 L20 70 Z",
+                        "link": "/people/"
+                    },
+                    {
+                        "text": "动物",
+                        "path_d": "M20 20 L70 20 L70 70 L20 70 Z",
+                        "link": "/animal/"
+                    },
+                    {
+                        "text": "卡通",
+                        "path_d": "M20 20 L70 20 L70 70 L20 70 Z",
+                        "link": "/cartoon/"
+                    },
+                    {
+                        "text": "素材",
+                        "path_d": "M20 20 L70 20 L70 70 L20 70 Z",
+                        "link": "/material-image/"
+                    },
+                    {
+                        "text": "壁纸",
+                        "path_d": "M20 20 L70 20 L70 70 L20 70 Z",
+                        "link": "/wallpaper/"
+                    }
+                ]
+            },
+            {
+                "text": "音乐",
+                "path_d": "M10 10 L90 10 L90 90 L10 90 Z",
+                "link": "/music/",
+                "items": [
+                    {
+                        "text": "歌曲",
+                        "path_d": "M20 20 L70 20 L70 70 L20 70 Z",
+                        "link": "/song/"
+                    },
+                    {
+                        "text": "专辑",
+                        "path_d": "M20 20 L70 20 L70 70 L20 70 Z",
+                        "link": "/album/"
+                    },
+                    {
+                        "text": "演唱会",
+                        "path_d": "M20 20 L70 20 L70 70 L20 70 Z",
+                        "link": "/concert/"
+                    },
+                    {
+                        "text": "音乐资源",
+                        "path_d": "M20 20 L70 20 L70 70 L20 70 Z",
+                        "link": "/music-resource/"
+                    }
+                ]
+            },
+            {
+                "text": "其他",
+                "path_d": "M10 10 L90 10 L90 90 L10 90 Z",
+                "link": "/other/",
+                "items": [
+                    {
+                        "text": "素材",
+                        "path_d": "M20 20 L70 20 L70 70 L20 70 Z",
+                        "link": "/material-other/"
+                    },
+                    {
+                        "text": "模板",
+                        "path_d": "M20 20 L70 20 L70 70 L20 70 Z",
+                        "link": "/template/"
+                    },
+                    {
+                        "text": "工具",
+                        "path_d": "M20 20 L70 20 L70 70 L20 70 Z",
+                        "link": "/tool/"
+                    },
+                    {
+                        "text": "壁纸",
+                        "path_d": "M20 20 L70 20 L70 70 L20 70 Z",
+                        "link": "/wallpaper-other/"
+                    },
+                    {
+                        "text": "主题",
+                        "path_d": "M20 20 L70 20 L70 70 L20 70 Z",
+                        "link": "/theme/"
+                    },
+                    {
+                        "text": "插件",
+                        "path_d": "M20 20 L70 20 L70 70 L20 70 Z",
+                        "link": "/plugin/"
+                    }
+                ]
+            }
+        ];
+
+        let currentEditingRow = null;
+
+        function displayResources() {
+            const tableBody = document.querySelector('#resourceTable tbody');
+            tableBody.innerHTML = ''; // 清空表格内容
+
+            resourceData.forEach((resource, index) => {
+                const row = tableBody.insertRow();
+                const idCell = row.insertCell();
+                const textCell = row.insertCell();
+                const linkCell = row.insertCell();
+                const pathCell = row.insertCell();
+                const actionCell = row.insertCell();
+
+                idCell.textContent = index + 1;
+                textCell.textContent = resource.text;
+                linkCell.textContent = resource.link;
+                pathCell.textContent = resource.path_d;
+
+                // 添加操作按钮
+                const editButton = document.createElement('button');
+                editButton.className = 'edit-button';
+                editButton.textContent = '编辑';
+                editButton.onclick = () => editResource(index);
+                actionCell.appendChild(editButton);
+
+                const deleteButton = document.createElement('button');
+                deleteButton.className = 'delete-button';
+                deleteButton.textContent = '删除';
+                deleteButton.onclick = () => deleteResource(index);
+                actionCell.appendChild(deleteButton);
+            });
+        }
+
+        function createResource() {
+            const newResource = {
+                "text": "",
+                "path_d": "",
+                "link": "",
+                "items": []
+            };
+
+            resourceData.push(newResource);
+            currentEditingRow = resourceData.length - 1; // 设置正在编辑的行
+            displayResources();
+            editResource(currentEditingRow);
+        }
+
+        function editResource(index) {
+            currentEditingRow = index;
+
+            const row = document.querySelector(`#resourceTable tbody tr:nth-child(${index + 1})`);
+            const textCell = row.cells[1];
+            const linkCell = row.cells[2];
+            const pathCell = row.cells[3];
+
+            // 创建输入框
+            const textInput = document.createElement('input');
+            textInput.type = 'text';
+            textInput.value = textCell.textContent;
+            textCell.innerHTML = ''; // 清空单元格内容
+            textCell.appendChild(textInput);
+
+            const linkInput = document.createElement('input');
+            linkInput.type = 'text';
+            linkInput.value = linkCell.textContent;
+            linkCell.innerHTML = '';
+            linkCell.appendChild(linkInput);
+
+            const pathInput = document.createElement('input');
+            pathInput.type = 'text';
+            pathInput.value = pathCell.textContent;
+            pathCell.innerHTML = '';
+            pathCell.appendChild(pathInput);
+
+            // 添加保存和取消按钮
+            const saveButton = document.createElement('button');
+            saveButton.className = 'save-button';
+            saveButton.textContent = '保存';
+            saveButton.onclick = () => saveResource(index);
+            row.cells[4].innerHTML = '';
+            row.cells[4].appendChild(saveButton);
+
+            const cancelButton = document.createElement('button');
+            cancelButton.className = 'cancel-button';
+            cancelButton.textContent = '取消';
+            cancelButton.onclick = () => cancelEdit(index);
+            row.cells[4].appendChild(cancelButton);
+        }
+
+        function saveResource(index) {
+            const row = document.querySelector(`#resourceTable tbody tr:nth-child(${index + 1})`);
+            const textInput = row.cells[1].querySelector('input');
+            const linkInput = row.cells[2].querySelector('input');
+            const pathInput = row.cells[3].querySelector('input');
+
+            resourceData[index].text = textInput.value;
+            resourceData[index].link = linkInput.value;
+            resourceData[index].path_d = pathInput.value;
+
+            displayResources();
+        }
+
+        function cancelEdit(index) {
+            displayResources();
+        }
+
+        function deleteResource(index) {
+            if (confirm('确定要删除此分类吗？')) {
+                resourceData.splice(index, 1);
+                displayResources();
+            }
+        }
+
+        // 初始化表格数据
+        displayResources();
+    </script>
+
+</body>
+
+</html>

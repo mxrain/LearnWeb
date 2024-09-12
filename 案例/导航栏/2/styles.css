@@ -1,0 +1,79 @@
+/* 渐变毛玻璃暖调背景颜色 */
+
+body {
+    background: linear-gradient(to right, #fff, #fff);
+}
+
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.navbar {
+    display: flex;
+    justify-content:  space-between;
+    align-items: center;
+    background-color: #33333300;
+    padding: 10px 20px;
+}
+
+.logo {
+    color: rgb(1, 1, 1);
+    font-size: 24px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li {
+    position: relative; /* 使子菜单相对于父菜单定位 */
+    margin-left: 20px;
+}
+
+.nav-links a {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    padding: 8px 16px;
+    transition: background-color 0.3s;
+}
+
+.nav-links a:hover {
+    background-color: #575757;
+    border-radius: 4px;
+}
+
+/* 子菜单样式 */
+.submenu {
+    display: none; /* 默认隐藏子菜单 */
+    position: absolute; /* 绝对定位 */
+    top: 100%; /* 在父菜单下方显示 */
+    left: 0; /* 左对齐 */
+    background-color: #333; /* 子菜单背景颜色 */
+    list-style: none;
+    padding: 10px 0; /* 上下内边距 */
+    margin: 0;
+    white-space: nowrap; /* 防止换行 */
+    z-index: 1; /* 确保子菜单在上层 */
+    display: flex; /* 使用flexbox布局 */
+}
+
+.nav-links li:hover .submenu {
+    display: flex; /* 鼠标悬停时显示子菜单 */
+}
+
+.submenu li {
+    margin: 0 30px; /* 子菜单项左右间距 */
+}
+
+.submenu a {
+    padding: 8px 0; /* 子菜单项的上下内边距 */
+}
+
+.submenu a:hover {
+    background-color: #575757; /* 子菜单项悬停效果 */
+}
